@@ -5,7 +5,7 @@ import argparse
 
 from requests import get
 from urllib3.exceptions import ReadTimeoutError
-from request.requests.exceptions import ConnectTimeout
+from requests.exceptions import ConnectTimeout
 from influxdb_client import InfluxDBClient, Point, WriteOptions
 from influxdb_client.client.exceptions import InfluxDBError
 from influxdb_client.client.write_api import SYNCHRONOUS
@@ -122,8 +122,9 @@ def fetch_data():
             print(f"{protocol}://{froniusIP}/{endpoint} returns no json!")
         except KeyError:
             print(f"{protocol}://{froniusIP}/{endpoint} is no valid endpoint!")
-        finally:
-            client.close()
+
+    # Close InfluxDB client
+    client.close()
 
 while True:
     print(str(datetime.now()) + " - Fetching data")
