@@ -1,0 +1,20 @@
+services:
+  fronius-crawler:
+    container_name: fronius-crawler
+    image: ghcr.io/dieechtenilente/fronius-influxdb-exporter/fronius-influx-exporter:latest
+    restart: unless-stopped
+    environment:
+      - FRONIUS_IP=192.168.0.101
+      - PLANT_NAME=fronius_1
+      - INFLUXDB_SERVER=influxdb2.example.com
+      - INFLUXDB_TOKEN=verylongtoken
+      - INFLUXDB_ORG=organization
+      - INFLUXDB_BUCKET=bucket
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+    # Optional, if the container does not run in the same network (e.g via VPN without proper DNS resolution)
+    extra_hosts:
+      - "influxdb2.example.com:192.168.0.100"
