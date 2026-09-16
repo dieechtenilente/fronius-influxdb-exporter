@@ -1,10 +1,11 @@
 import json
-from requests import get
 from time import sleep
 from datetime import datetime
 import argparse
-import urllib3
 
+from requests import get
+from urllib3.exceptions import ReadTimeoutError
+from request.requests.exceptions import ConnectTimeout
 from influxdb_client import InfluxDBClient, Point, WriteOptions
 from influxdb_client.client.exceptions import InfluxDBError
 from influxdb_client.client.write_api import SYNCHRONOUS
@@ -111,11 +112,11 @@ def fetch_data():
 
                         except InfluxDBError as e:
                             print(e)
-                        except urllib3.exceptions.ReadTimeoutError as e:
+                        except ReadTimeoutError as e:
                             print("Read timeout" + e)
             else:
                 print(f"{protocol}://{froniusIP}/{endpoint} returns status code {sc}!")
-        except requests.exceptions.ConnectTimeout:
+        except ConnectTimeout:
             print(f"{protocol}://{froniusIP}/{endpoint} is unreachable!")
         except ValueError:
             print(f"{protocol}://{froniusIP}/{endpoint} returns no json!")
