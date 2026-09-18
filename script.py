@@ -137,7 +137,7 @@ while True:
     sunrise = now.replace(hour=4, minute=30, second=0, microsecond=0)
 
     if datetime.now() >= sunset or datetime.now() < sunrise:
-        print(str(datetime.now()) + " - Wait for " + 3600 + " seconds.")
+        print(str(datetime.now()) + " - Wait for 3600 seconds.")
         sleep(3600)
     else:
         print(str(datetime.now()) + " - Wait for " + str(SLEEP) + " seconds.")
