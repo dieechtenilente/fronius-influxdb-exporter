@@ -113,7 +113,7 @@ def fetch_data():
                         except InfluxDBError as e:
                             print(e)
                         except ReadTimeoutError as e:
-                            print("Read timeout" + e)
+                            print("Read timeout" + str(e))
             else:
                 print(f"{protocol}://{froniusIP}/{endpoint} returns status code {sc}!")
         except ConnectTimeout:
