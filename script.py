@@ -132,13 +132,13 @@ while True:
 
     # TODO: Make this pretty and maybe adjustable
     now = datetime.now()
-
-    sunset = now.replace(hour=22, minute=00, second=0, microsecond=0)
-    sunrise = now.replace(hour=4, minute=30, second=0, microsecond=0)
+    # this is probably in UTC?
+    sunset = now.replace(hour=19, minute=30, second=0, microsecond=0)
+    sunrise = now.replace(hour=4, minute=00, second=0, microsecond=0)
 
     if datetime.now() >= sunset or datetime.now() < sunrise:
-        print(str(datetime.now()) + " - Wait for 3600 seconds.")
-        sleep(3600)
+        print(str(datetime.now()) + " - Wait for 1800 seconds.")
+        sleep(1800)
     else:
         print(str(datetime.now()) + " - Wait for " + str(SLEEP) + " seconds.")
         sleep(SLEEP)
