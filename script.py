@@ -4,7 +4,7 @@ from datetime import datetime
 import argparse
 
 from requests import get
-from urllib3.exceptions import ReadTimeoutError
+from urllib3.exceptions import ReadTimeoutError, ConnectTimeoutError
 from requests.exceptions import ConnectTimeout
 from influxdb_client import InfluxDBClient, Point, WriteOptions
 from influxdb_client.client.exceptions import InfluxDBError
@@ -117,11 +117,13 @@ def fetch_data():
             else:
                 print(f"{protocol}://{froniusIP}/{endpoint} returns status code {sc}!")
         except ConnectTimeout:
-            print(f"{protocol}://{froniusIP}/{endpoint} is unreachable!")
+            print(f"{protocol}://{froniusIP}/{endpoint} or {InfluxDBserver} is unreachable!")
         except ValueError:
             print(f"{protocol}://{froniusIP}/{endpoint} returns no json!")
         except KeyError:
             print(f"{protocol}://{froniusIP}/{endpoint} is no valid endpoint!")
+        except ConnectTimeoutError
+            print(f"{protocol}://{froniusIP}/{endpoint} or {InfluxDBserver} is unreachable!")
 
     # Close InfluxDB client
     client.close()
