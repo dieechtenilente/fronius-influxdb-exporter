@@ -122,7 +122,7 @@ def fetch_data():
             print(f"{protocol}://{froniusIP}/{endpoint} returns no json!")
         except KeyError:
             print(f"{protocol}://{froniusIP}/{endpoint} is no valid endpoint!")
-        except ConnectTimeoutError
+        except ConnectTimeoutError:
             print(f"{protocol}://{froniusIP}/{endpoint} or {InfluxDBserver} is unreachable!")
 
     # Close InfluxDB client
